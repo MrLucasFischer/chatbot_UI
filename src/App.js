@@ -41,16 +41,13 @@ class App extends Component {
       })
     } else {
       //Get Server response to user query
-      fetch(`http://api.novasearch.org/car/v2/search?algo=bm25&k1=0.5&b=0.45&q=${message}`)
-        .then(result => result.json())
+      // `http://api.novasearch.org/car/v2/search?algo=bm25&k1=0.5&b=0.45&q=${message}`
+      fetch(`http://localhost:5000?q=${message}`)
+        .then(result => result.text())
         .then(data => {
-
-          //Add to messages, one with the server response to the query,
-          //Another with the photo from flicker
-
           const updatedMessages = this.state.messages
           updatedMessages.push({
-            text: data[0],
+            text: data,
             fromBot: true,
             photo: false
           })
